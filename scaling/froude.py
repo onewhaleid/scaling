@@ -3,6 +3,8 @@ import pint
 
 def _convert(x, length_scale_factor, from_unit, to_unit):
 
+    x_scaled = x.copy()
+
     # Initialise unit definitions
     ureg = pint.UnitRegistry()
 
@@ -24,17 +26,17 @@ def _convert(x, length_scale_factor, from_unit, to_unit):
 
     # Scale time (dataframe only)
     try:
-        x.index *= length_scale_factor**froude_t_exponent
+        x_scaled.index *= length_scale_factor**froude_t_exponent
     except AttributeError:
         pass
 
     # Scale values
-    x *= froude_scale_factor
+    x_scaled *= froude_scale_factor
 
     # Convert to output units
-    x *= unit_conversion_factor
+    x_scaled *= unit_conversion_factor
 
-    return x
+    return x_scaled
 
 
 def proto_to_model(x_proto, length_scale, from_unit, to_unit):
