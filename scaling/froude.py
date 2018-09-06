@@ -52,7 +52,7 @@ def proto_to_model(x_proto, length_scale, from_unit, to_unit):
 
     length_scale_factor = 1 / length_scale
 
-    return _convert(x_model, length_scale_factor, from_unit, to_unit)
+    return _convert(x_proto, length_scale_factor, from_unit, to_unit)
 
 
 def model_to_proto(x_model, length_scale, from_unit, to_unit):
@@ -70,4 +70,4 @@ def model_to_proto(x_model, length_scale, from_unit, to_unit):
 
     length_scale_factor = length_scale
 
-    return _convert(x, length_scale_factor, from_unit, to_unit)
+    return _convert(x_model, length_scale_factor, from_unit, to_unit)
