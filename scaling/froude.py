@@ -3,8 +3,6 @@ import pint
 
 def _convert(x, length_scale_factor, from_unit, to_unit):
 
-    x_scaled = x.copy()
-
     # Initialise unit definitions
     ureg = pint.UnitRegistry()
 
@@ -24,17 +22,17 @@ def _convert(x, length_scale_factor, from_unit, to_unit):
         from_unit.dimensionality['[time]'] * froude_t_exponent +
         from_unit.dimensionality['[mass]'] * froude_m_exponent)
 
-    # Scale time (dataframe only)
-    try:
-        x_scaled.index *= length_scale_factor**froude_t_exponent
-    except AttributeError:
-        pass
-
     # Scale values
-    x_scaled *= froude_scale_factor
+    x_scaled = x * froude_scale_factor
 
     # Convert to output units
     x_scaled *= unit_conversion_factor
+
+    # Scale time (dataframe or series only)
+    try:
+        x_scaled.index *= length_scale_factor**froude_t_exponent
+    except (AttributeError, TypeError):
+        pass
 
     return x_scaled
 
