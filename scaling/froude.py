@@ -7,8 +7,8 @@ def _convert(x, length_scale_factor, from_unit, to_unit):
     ureg = pint.UnitRegistry()
 
     # Calculate unit conversion factor
-    from_unit = ureg[from_unit]
-    to_unit = ureg[to_unit]
+    from_unit = ureg(from_unit)
+    to_unit = ureg(to_unit)
     unit_conversion_factor = (1 * from_unit).to(to_unit).magnitude
 
     # Define Froude scaling relationships
