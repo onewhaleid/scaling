@@ -15,3 +15,8 @@ def test_unit_dimensions():
     assert froude.dimensions('kg') == 'M^1'
     assert froude.dimensions('s') == 'T^1'
     assert froude.dimensions('N') == 'L^1 M^1 T^-2'
+
+def test_scaling_exponent():
+    assert froude.scaling_exponent('m') == 1
+    assert froude.scaling_exponent('kg') == 3
+    assert froude.scaling_exponent('s') == 0.5

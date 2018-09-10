@@ -95,3 +95,20 @@ def dimensions(unit):
             s += '{}^{:g} '.format(symbol, exponent)
 
     return s.strip()
+
+
+def scaling_exponent(unit):
+    """Convert prototype value(s) to model value(s) in specified units.
+
+    Args:
+        unit (str):  unit of quantity to be scaled
+
+    Returns:
+        scaling factor
+    """
+    # Calculate Froude scaling factor
+    scaling_exponent = (UREG(unit).dimensionality['[length]'] * LENGTH_EXPONENT
+                        + UREG(unit).dimensionality['[time]'] * TIME_EXPONENT +
+                        UREG(unit).dimensionality['[mass]'] * MASS_EXPONENT)
+
+    return scaling_exponent
