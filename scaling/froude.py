@@ -1,26 +1,26 @@
 import pint
 
+# Initialise unit definitions
+UREG = pint.UnitRegistry()
+
+# Define Froude scaling relationships
+LENGTH_EXPONENT = 1
+TIME_EXPONENT = 1 / 2
+MASS_EXPONENT = 3
+
 
 def _convert(x, length_scale_factor, from_unit, to_unit):
 
-    # Initialise unit definitions
-    ureg = pint.UnitRegistry()
-
     # Calculate unit conversion factor
-    from_unit = ureg(from_unit)
-    to_unit = ureg(to_unit)
+    from_unit = UREG(from_unit)
+    to_unit = UREG(to_unit)
     unit_conversion_factor = from_unit.to(to_unit).magnitude
-
-    # Define Froude scaling relationships
-    froude_l_exponent = 1
-    froude_t_exponent = 1 / 2
-    froude_m_exponent = 3
 
     # Calculate Froude scaling factor
     froude_scale_factor = length_scale_factor**(
-        from_unit.dimensionality['[length]'] * froude_l_exponent +
-        from_unit.dimensionality['[time]'] * froude_t_exponent +
-        from_unit.dimensionality['[mass]'] * froude_m_exponent)
+        from_unit.dimensionality['[length]'] * LENGTH_EXPONENT +
+        from_unit.dimensionality['[time]'] * TIME_EXPONENT +
+        from_unit.dimensionality['[mass]'] * MASS_EXPONENT)
 
     # Scale values
     x_scaled = x * froude_scale_factor
@@ -30,7 +30,7 @@ def _convert(x, length_scale_factor, from_unit, to_unit):
 
     # Scale time (dataframe or series only)
     try:
-        x_scaled.index *= length_scale_factor**froude_t_exponent
+        x_scaled.index *= length_scale_factor**TIME_EXPONENT
     except (AttributeError, TypeError):
         pass
 
