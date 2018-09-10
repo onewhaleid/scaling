@@ -71,3 +71,27 @@ def model_to_proto(x_model, length_scale, from_unit, to_unit):
     length_scale_factor = length_scale
 
     return _convert(x_model, length_scale_factor, from_unit, to_unit)
+
+
+def dimensions(unit):
+    """Get unit dimensions.
+
+    Args:
+        unit (str):  unit name or symbol
+
+    Returns:
+        string containing unit dimensions
+    """
+
+    # Get dimensions of unit
+    dims = UREG(unit).dimensionality
+
+    dim_data = {'L': '[length]', 'M': '[mass]', 'T': '[time]'}
+
+    s = ''
+    for symbol, key in dim_data.items():
+        exponent = dims[key]
+        if exponent != 0:
+            s += '{}^{:g} '.format(symbol, exponent)
+
+    return s.strip()
