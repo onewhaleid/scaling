@@ -1,3 +1,4 @@
+import pandas as pd
 import pytest
 from scaling import froude
 
@@ -15,6 +16,16 @@ def test_froude_time():
 
 def test_froude_force():
     assert froude.model_to_proto(1, 10, 'N', 'N') == 1000
+
+def test_froude_time_index_dataframe():
+    df_model = pd.DataFrame(index=[2], data=[20])
+    df_proto = froude.model_to_proto(df_model, 16, 'mm', 'm', 's', 's')
+    assert df_proto.index.values[0] == 8
+
+def test_froude_mass_index_dataframe():
+    df_proto = pd.DataFrame(index=[4], data=[16])
+    df_model = froude.proto_to_model(df_proto, 2, 'kN', 'N', 'm', 'm')
+    assert df_model.index.values[0] == 2
 
 def test_unit_dimensions():
     assert froude.dimensions('m') == 'L^1'
