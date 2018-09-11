@@ -4,9 +4,11 @@ from scaling import froude
 
 def test_unit_to_same_unit():
     assert froude.model_to_proto(1, 1, 'm', 'm') == 1
+    assert froude.proto_to_model(1, 1, 'm', 'm') == 1
 
 def test_unit_to_different_unit():
     assert froude.model_to_proto(1, 1, 'kN', 'N') == 1000
+    assert froude.proto_to_model(1000, 1, 'N', 'kN') == 1
 
 def test_froude_length():
     assert froude.model_to_proto(1, 10, 'm', 'm') == 10
