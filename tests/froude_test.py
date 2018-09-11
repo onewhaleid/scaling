@@ -12,12 +12,15 @@ def test_unit_to_different_unit():
 
 def test_froude_length():
     assert froude.model_to_proto(1, 10, 'm', 'm') == 10
+    assert froude.proto_to_model(10, 10, 'm', 'm') == 1
 
 def test_froude_time():
     assert froude.model_to_proto(1, 25, 's', 's') == 5
+    assert froude.proto_to_model(5, 25, 's', 's') == 1
 
 def test_froude_force():
     assert froude.model_to_proto(1, 10, 'N', 'N') == 1000
+    assert froude.proto_to_model(1000, 10, 'N', 'N') == pytest.approx(1, 0.1)
 
 def test_froude_time_index_dataframe():
     df_model = pd.DataFrame(index=[2], data=[20])
