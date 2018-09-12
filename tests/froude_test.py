@@ -51,9 +51,16 @@ def test_unit_dimensions():
     assert froude.dimensions('kg') == 'M^1'
     assert froude.dimensions('s') == 'T^1'
     assert froude.dimensions('N') == 'L^1 M^1 T^-2'
+    assert froude.dimensions('Pa') == 'L^-1 M^1 T^-2'
+    assert froude.dimensions('L/m/s') == 'L^2 T^-1'
+    assert froude.dimensions('mm^2.s') == 'L^2 T^1'
 
 
 def test_scaling_exponent():
     assert froude.scaling_exponent('m') == 1
     assert froude.scaling_exponent('kg') == 3
     assert froude.scaling_exponent('s') == 0.5
+    assert froude.scaling_exponent('N') == 3
+    assert froude.scaling_exponent('Pa') == 1
+    assert froude.scaling_exponent('L/m/s') == 1.5
+    assert froude.scaling_exponent('mm^2.s') == 2.5
