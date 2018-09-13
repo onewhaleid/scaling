@@ -1,6 +1,8 @@
 import pandas as pd
 import pytest
-from scaling import froude
+from scaling import Froude
+
+froude = Froude()
 
 
 def test_unit_to_same_unit():
