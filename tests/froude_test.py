@@ -1,8 +1,8 @@
 import pandas as pd
 import pytest
-from scaling import Froude
+from scaling import FroudeConverter
 
-froude = Froude()
+froude = FroudeConverter()
 
 
 def test_unit_to_same_unit():

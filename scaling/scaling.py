@@ -146,9 +146,9 @@ class DimensionConverter(object):
         return scaling_exponent
 
 
-class Froude(DimensionConverter):
+class FroudeConverter(DimensionConverter):
     def __init__(self):
-        super(Froude, self).__init__()
+        super(FroudeConverter, self).__init__()
 
         # Define Froude scaling relationships
         self.LENGTH_EXPONENT = 1
@@ -156,9 +156,9 @@ class Froude(DimensionConverter):
         self.MASS_EXPONENT = 3
 
 
-class Reynolds(DimensionConverter):
+class ReynoldsConverter(DimensionConverter):
     def __init__(self):
-        super(Reynolds, self).__init__()
+        super(ReynoldsConverter, self).__init__()
 
         # Define Reynolds scaling relationships
         self.LENGTH_EXPONENT = 1
