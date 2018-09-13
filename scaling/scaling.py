@@ -1,15 +1,16 @@
 import pint
 
-# Initialise unit definitions
-UREG = pint.UnitRegistry()
 
+class DimensionConverter(object):
+    def __init__(self):
+        # Initialise unit definitions
+        self.ureg = pint.UnitRegistry()
 
-class DimensionConverter():
     def _convert(self, x, length_scale_factor, input_unit, target_unit):
 
         # Calculate unit conversion factor
-        input_unit = UREG(input_unit)
-        target_unit = UREG(target_unit)
+        input_unit = self.ureg(input_unit)
+        target_unit = self.ureg(target_unit)
         unit_conversion_factor = input_unit.to(target_unit).magnitude
 
         # Calculate Froude scaling factor
@@ -51,13 +52,14 @@ class DimensionConverter():
 
         # Convert values
         x_model = self._convert(x_proto, length_scale_factor, input_unit,
-                           target_unit)
+                                target_unit)
 
         # Convert index (dataframe or series only)
         if (index_input_unit is not None) and (index_target_unit is not None):
             if type(x_model).__name__ in ['DataFrame', 'Series']:
-                x_model.index = self._convert(x_model.index, length_scale_factor,
-                                         index_input_unit, index_target_unit)
+                x_model.index = self._convert(
+                    x_model.index, length_scale_factor, index_input_unit,
+                    index_target_unit)
             else:
                 raise ValueError("'index_input_unit' and 'index_target_unit' "
                                  "can only be used when input is dataframe")
@@ -89,13 +91,14 @@ class DimensionConverter():
 
         # Convert values
         x_proto = self._convert(x_model, length_scale_factor, input_unit,
-                           target_unit)
+                                target_unit)
 
         # Convert index (dataframe or series only)
         if (index_input_unit is not None) and (index_target_unit is not None):
             if type(x_proto).__name__ in ['DataFrame', 'Series']:
-                x_proto.index = self._convert(x_proto.index, length_scale_factor,
-                                         index_input_unit, index_target_unit)
+                x_proto.index = self._convert(
+                    x_proto.index, length_scale_factor, index_input_unit,
+                    index_target_unit)
             else:
                 raise ValueError("'index_input_unit' and 'index_target_unit' "
                                  "can only be used when input is dataframe")
@@ -113,7 +116,7 @@ class DimensionConverter():
         """
 
         # Get dimensions of unit
-        dims = UREG(unit).dimensionality
+        dims = self.ureg(unit).dimensionality
 
         dim_data = {'L': '[length]', 'M': '[mass]', 'T': '[time]'}
 
@@ -136,15 +139,17 @@ class DimensionConverter():
         """
         # Calculate Froude scaling factor
         scaling_exponent = (
-            UREG(unit).dimensionality['[length]'] * self.LENGTH_EXPONENT +
-            UREG(unit).dimensionality['[time]'] * self.TIME_EXPONENT +
-            UREG(unit).dimensionality['[mass]'] * self.MASS_EXPONENT)
+            self.ureg(unit).dimensionality['[length]'] * self.LENGTH_EXPONENT +
+            self.ureg(unit).dimensionality['[time]'] * self.TIME_EXPONENT +
+            self.ureg(unit).dimensionality['[mass]'] * self.MASS_EXPONENT)
 
         return scaling_exponent
 
 
 class Froude(DimensionConverter):
     def __init__(self):
+        super(Froude, self).__init__()
+
         # Define Froude scaling relationships
         self.LENGTH_EXPONENT = 1
         self.TIME_EXPONENT = 1 / 2
@@ -153,6 +158,8 @@ class Froude(DimensionConverter):
 
 class Reynolds(DimensionConverter):
     def __init__(self):
+        super(Reynolds, self).__init__()
+
         # Define Reynolds scaling relationships
         self.LENGTH_EXPONENT = 1
         self.TIME_EXPONENT = 2
