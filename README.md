@@ -22,9 +22,9 @@ pip install git+http://git.wrl.unsw.edu.au:3000/danh/scaling.git
 >>> froude.scaling_exponent('s')
 0.5
 
->>> # Get length, mass and time dimensions for quantities of force
->>> froude.dimensions('N')
-'L^1 M^1 T^-2'
+>>> # Get length, mass and time dimensions for quantities of energy
+>>> froude.dimensions('kJ')
+'L^2 M^1 T^-2'
 ```
 
 `scaling` uses `pint` for unit and dimension conversions. `pint` is able to interpret a wide range of different input units.
@@ -34,7 +34,13 @@ pip install git+http://git.wrl.unsw.edu.au:3000/danh/scaling.git
 >>> froude.model_to_proto(10, length_scale=100, 'mm.H20', 'kPa')
 9.80665
 
->>> # Make sure gravity remains constant in Froude scaling
->>> froude.proto_to_model(1, 10, 'gravity', 'meter/second/second')
-9.80665
+>>> # Demonstrate different ways of specifying units of Newtons
+>>> froude.dimensions('N')
+'L^1 M^1 T^-2'
+>>> froude.dimensions('newton')
+'L^1 M^1 T^-2'
+>>> froude.dimensions('kg.m/s/s')
+'L^1 M^1 T^-2'
+>>> froude.dimensions('kilogram.metre/second^2')
+'L^1 M^1 T^-2'
 ```
