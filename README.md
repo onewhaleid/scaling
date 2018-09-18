@@ -11,7 +11,7 @@ pip install git+http://git.wrl.unsw.edu.au:3000/danh/scaling.git
 ## Usage
 
 ```python
->>> from scaling import Froude
+>>> from scaling import FroudeConverter
 >>> froude = FroudeConverter()
 
 >>> # Convert model value of 200 mm to prototype value (m) with scale of 10
@@ -69,7 +69,7 @@ Dataframes are also accepted, and specific units can be specified for the values
 >>> froude.model_to_proto(10, length_scale=100, 'mm.H20', 'kPa')
 9.80665
 
->>> # Demonstrate different ways of specifying units of Newtons
+>>> # Demonstrate different ways of specifying units of newtons
 >>> froude.dimensions('N')
 'L^1 M^1 T^-2'
 >>> froude.dimensions('newton')
