@@ -1,6 +1,6 @@
 # scaling
 
-Convert quantities between model and prototype scale using Froude similarity.
+Convert quantities between model and prototype scale using Froude and Reynoolds similitude.
 
 ## Installation
 
