@@ -42,7 +42,7 @@ def test_froude_time_index_dataframe():
     assert df_proto.index.values[0] == 8
 
 
-def test_froude_mass_index_dataframe():
+def test_froude_length_index_dataframe():
     df_proto = pd.DataFrame(index=[4], data=[16])
     df_model = froude.proto_to_model(df_proto, 2, 'kN', 'N', 'm', 'm')
     assert df_model.index.values[0] == 2
