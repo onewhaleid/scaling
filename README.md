@@ -44,7 +44,7 @@ Dataframes are also accepted, and specific units can be specified for the values
 >>> df_model.plot()
 ```
 
-![](doc/model.png#0)
+![](doc/model.png)
 
 ```python
 >>> # Convert to prototype dimensions, with length scale=25
@@ -59,7 +59,7 @@ df_proto = froude.model_to_proto(
 df_proto.columns = ['$\eta$ (m)']
 df_proto.plot()
 ```
-![](doc/proto.png#0)
+![](doc/proto.png)
 
 
 `scaling` uses `pint` for unit and dimension conversions. `pint` is able to interpret a wide range of different input units.
