@@ -1,6 +1,6 @@
 # scaling
 
-Convert quantities between model and prototype scale using Froude and Reynoolds similitude.
+Convert quantities between model and prototype scale using Froude and Reynolds similitude.
 
 ## Installation
 
@@ -48,16 +48,16 @@ Dataframes are also accepted, and specific units can be specified for the values
 
 ```python
 >>> # Convert to prototype dimensions, with length scale=25
-df_proto = froude.model_to_proto(
-    df_model,
-    length_scale=25,
-    input_unit='mm',
-    target_unit='m',
-    index_input_unit='s',
-    index_target_unit='s')
+>>> df_proto = froude.model_to_proto(
+        df_model,
+        length_scale=25,
+        input_unit='mm',
+        target_unit='m',
+        index_input_unit='s',
+        index_target_unit='s')
 
-df_proto.columns = ['$\eta$ (m)']
-df_proto.plot()
+>>> df_proto.columns = ['$\eta$ (m)']
+>>> df_proto.plot()
 ```
 ![](doc/proto.png)
 
@@ -79,3 +79,30 @@ df_proto.plot()
 >>> froude.dimensions('kilogram.metre/second^2')
 'L^1 M^1 T^-2'
 ```
+
+## Froude scaling reference
+
+| Quantity     | Dimensions    | Scaling exponent |
+|--------------|---------------|------------------|
+| Length       | L^1           | λ^1              |
+| Mass         | M^1           | λ^3              |
+| Time         | T^1           | λ^0.5            |
+| Velocity     | L^1 T^-1      | λ^0.5            |
+| Acceleration | L^1 T^-2      | λ^0              |
+| Force        | L^1 M^1 T^-2  | λ^3              |
+| Pressure     | L^-1 M^1 T^-2 | λ^1              |
+| Overtopping  | L^2 T^-1      | λ^1.5            |
+
+
+## Reynolds scaling reference
+
+| Quantity     | Dimensions    | Scaling exponent |
+|--------------|---------------|------------------|
+| Length       | L^1           | λ^1              |
+| Mass         | M^1           | λ^3              |
+| Time         | T^1           | λ^2              |
+| Velocity     | L^1 T^-1      | λ^-1             |
+| Acceleration | L^1 T^-2      | λ^-3             |
+| Force        | L^1 M^1 T^-2  | λ^0              |
+| Pressure     | L^-1 M^1 T^-2 | λ^-2             |
+| Overtopping  | L^2 T^-1      | λ^0              |
