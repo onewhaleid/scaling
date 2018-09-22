@@ -5,7 +5,7 @@ with open('README.md', 'r') as f:
 
 setup(
     name='scaling',
-    version='0.2.0',
+    version='0.2.1',
     packages=['scaling'],
     install_requires=['pint'],
     author='Dan Howe',
