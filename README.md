@@ -5,7 +5,7 @@ Convert quantities between model and prototype scale using Froude and Reynolds s
 ## Installation
 
 ```
-pip install git+http://git.wrl.unsw.edu.au:3000/danh/scaling.git
+pip install scaling
 ```
 
 ## Usage
@@ -44,7 +44,7 @@ Dataframes are also accepted, and specific units can be specified for the values
 >>> df_model.plot()
 ```
 
-![](doc/model.png)
+![model](https://user-images.githubusercontent.com/11261876/45915234-575e4300-be95-11e8-9edd-30338bd6db2d.png)
 
 ```python
 >>> # Convert to prototype dimensions, with length scale=25
@@ -59,8 +59,7 @@ Dataframes are also accepted, and specific units can be specified for the values
 >>> df_proto.columns = ['$\eta$ (m)']
 >>> df_proto.plot()
 ```
-![](doc/proto.png)
-
+![proto](https://user-images.githubusercontent.com/11261876/45915245-6c3ad680-be95-11e8-9912-2dc2afc16b9a.png)
 
 `scaling` uses `pint` for unit and dimension conversions. `pint` is able to interpret a wide range of different input units.
 
